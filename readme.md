@@ -5,6 +5,7 @@ HolyP is an adaption of HolyC for polytoria.
 ### Differences Between HolyC and HolyP
 Most of everything is the same but, there are different types
 and it removes the "print if its an expression".
+It ofcourse also doesn't have inline assembly as this language isn't compiled, it is interpereted.
 
 ### Syntax
 ```HC
@@ -25,3 +26,9 @@ Int Main() {
 
 Main;
 ```
+
+## Special Thanks
+Terry A. Davis
+https://github.com/SpaciousCoder78/holyc-docs/tree/main
+https://templeos.net/holyc/
+https://tinkeros.github.io/WbTempleOS/
