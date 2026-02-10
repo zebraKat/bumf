@@ -49,8 +49,8 @@ l.TokenTypes = {
 	KeywordStruct  = "TK_KEYWORD_STRUCT",
 	KeywordUnion   = "TK_KEYWORD_UNION",
 -- +----PREPROCCESSOR----+
-	PreProcDefine  = "TK_PREPROC_DEFINE",
 	PreProcInclude = "TK_PREPROC_INCLUDE",
+	PreProcAssert  = "TK_PREPROC_ASSERT",
 }
 
 

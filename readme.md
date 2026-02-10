@@ -5,7 +5,10 @@ HolyP is an adaption of HolyC for polytoria.
 ### Differences Between HolyC and HolyP
 Most of everything is the same but, there are different types
 and it removes the "print if its an expression".
-It ofcourse also doesn't have inline assembly as this language isn't compiled, it is interpereted.
+It of course also doesn't have inline assembly as this language isn't compiled, it is interpereted.
+HolyP also removes some of the preprocessor. The only preprocessor instructions it has is:
+- Include
+- Assert
 
 ### Syntax
 ```HC
