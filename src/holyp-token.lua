@@ -1,13 +1,27 @@
-local Pos = require("util/Position")
+-- Tokens make up the result of the Lexer.
+-- The parser uses tokens to make sure the syntax is correct.
+local Token = {}
 
--- This is the lexer for HolyP.
--- The lexer splits the source code into tokens that hold the parser can go through.
-local l = {}
+-- Creates a new token. Takes in a type, lexeme, position, and optionally a value.
+function Token.New(type, lexeme, pos, value)
+	return setmetatable({
+		type = type,
+		lexeme = lexeme,
+		pos = pos,
+		value = value or 0
+	}, Token)
+end
+
+-- Returns true if the token's type is equal to the type passed in.
+function Token:Is(type)
+	return self.type == type
+end
 
 
-l.TokenTypes = {
+Token.Types = {
 -- +----MISC----+
 	Identifier = "TK_IDENTIFIER",
+	Eof        = "TK_EOF", -- End of file
 
 -- +----LITERALS----+
 	Int    = "TK_INT",    -- 0
@@ -38,6 +52,10 @@ l.TokenTypes = {
 	MiEq     = "TK_MIEQ",          -- -=
 	StEq     = "TK_STEQ",          -- *=
 	SlEq     = "TK_SLEQ",          -- /=
+	Less     = "TK_LESS",          -- <
+	Greater  = "TK_GREATER",       -- <
+	LEq      = "TK_LEQ",           -- <
+	GEq      = "TK_GEQ",           -- <
 
 -- +----TYPES----+
 	TypeInt    = "TK_TYPE_INT",    -- Int
@@ -58,7 +76,6 @@ l.TokenTypes = {
 	KeywordReturn  = "TK_KEYWORD_RETURN",  -- return
 	KeywordConst   = "TK_KEYWORD_CONST",   -- const
 	KeywordClass   = "TK_KEYWORD_CLASS",   -- class
-	KeywordStruct  = "TK_KEYWORD_STRUCT",  -- struct
 	KeywordUnion   = "TK_KEYWORD_UNION",   -- union
 
 -- +----PREPROCCESSOR----+
@@ -72,5 +89,4 @@ l.TokenTypes = {
 	DirFile = "TK_DIRECTIVE_FILE", -- __FILE__
 }
 
-
-return l
+return Token

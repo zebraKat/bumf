@@ -1,1 +1,1 @@
-local Lexer = require("holyp-lex")
+local Lexer = require("src/holyp-lex")
