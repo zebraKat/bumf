@@ -28,7 +28,7 @@ Main;
 ```
 
 ## Special Thanks
-Terry A. Davis
-https://github.com/SpaciousCoder78/holyc-docs/tree/main
-https://templeos.net/holyc/
-https://tinkeros.github.io/WbTempleOS/
+- Terry A. Davis
+- https://github.com/SpaciousCoder78/holyc-docs/tree/main
+- https://templeos.net/holyc/
+- https://tinkeros.github.io/WbTempleOS/
