@@ -73,13 +73,29 @@ Token.Types = {
 	DirFile = "TK_DIRECTIVE_FILE", -- __FILE__
 }
 
--- Creates a new token. Takes in a type, lexeme, position, and optionally a value.
-function Token.New(type, lexeme, pos, value)
+--[[ Returns whether the input is a valid token type ]]--
+function Token.IsValidTokenType(t)
+	if type(t) ~= "string" then return false end
+	if not table.find(Token.Types, t) then return false end
+	return true
+end
+
+--[[ Creates a new token. Takes in a type, lexeme, span, and optionally a value. ]]--
+function Token.New(type, lexeme, span, value)
+	if type(lexeme) ~= "string" then error("Expected a valid lexeme (string) when creating a token.") end
+	if type(type) ~= "string" or not Token.IsValidTokenType(type) then
+		error("Expected a valid tokentype when creating token.")
+	end
+	if type(pos) ~= "table" or pos.From == nil or pos.To == nil then
+		error("Expected a valid span when creating token.")
+	end
+
+
 	local self = {
 		Type = type,
 		Lexeme = lexeme,
-		Position = pos,
-		Value = Value or 0
+		Span = span,
+		Value = value or 0 --[[ We do not care about the type of `value` as the type is dependent on the tokentype. ]]--
 	}
 
 	--[[ Returns whether or not the token's type is equal to the passed in type. ]]--
@@ -88,12 +104,6 @@ function Token.New(type, lexeme, pos, value)
 	end
 
 	return self
-end
-
-function Token.IsValidTokenType(t)
-	if type(t) ~= "string" then return false end
-	if not table.find(Token.Types, t) then return false end
-	return true
 end
 
 return Token
