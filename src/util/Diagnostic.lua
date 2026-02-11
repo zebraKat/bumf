@@ -1,24 +1,33 @@
 local Diagnostic = {}
+
 Diagnostic.Mode = {
-	warn = "WARN",
-	error = "ERROR"
+	Warn = "WARN",
+	Error = "ERROR"
 }
 
-function Diagnostic.New(message, mode, pos)
-	return setmetatable({
-		msg = message,
-		mode = mode,
-		pos = pos
-	}, Diagnostic)
-end
+function Diagnostic.New(message, mode, position)
+	local self = {
+		Message = message,
+		Mode = mode,
+		Position = position,
+		
+	}
 
-function Diagnostic:String()
-	-- [MODE]:Y:X: MESSAGE
-	local str = ""
-	str = str.."["..self.mode.."]:"
-	str = str..self.pos.y..":"..self.pos.x..": "
-	str = str..self.msg
-	return str
+	--[[
+	--	Returns the Diagnostic as a string.
+	--	It follows this format: `[MODE]:POSITION.Y:POSITION.X: MESSAGE`
+	--]]
+	function self.String()
+		local StringBuilder = ""
+		
+		StringBuilder = StringBuilder.."["..self.Mode.."]:"
+		StringBuilder = StringBuilder..self.Position.y..":"..self.Position.x..": "
+		StringBuilder = StringBuilder..self.Message
+
+		return StringBuilder
+	end
+	
+	return self
 end
 
 return Diagnostic

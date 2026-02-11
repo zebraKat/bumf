@@ -1,18 +1,22 @@
 local Position = {}
 
 function Position.New(x, y)
-	return setmetatable({
+	local self = {
 		x = x,
-		y = y
-	}, Position)
-end
+		y = y,
+	}
 
-function Position:Line()
-	return self.y
-end
+	--[[ Returns Position.y ]]--
+	function self.Line()
+		return self.y
+	end
 
-function Position:Char()
-	return self.x
+	--[[ Returns Position.x ]]--
+	function self.Char()
+		return self.x
+	end
+
+	return self
 end
 
 return Position
