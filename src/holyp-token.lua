@@ -2,34 +2,18 @@
 -- The parser uses tokens to make sure the syntax is correct.
 local Token = {}
 
--- Creates a new token. Takes in a type, lexeme, position, and optionally a value.
-function Token.New(type, lexeme, pos, value)
-	return setmetatable({
-		type = type,
-		lexeme = lexeme,
-		pos = pos,
-		value = value or 0
-	}, Token)
-end
-
--- Returns true if the token's type is equal to the type passed in.
-function Token:Is(type)
-	return self.type == type
-end
-
-
 Token.Types = {
--- +----MISC----+
+	--[[ +----MISC----+ ]]--
 	Identifier = "TK_IDENTIFIER",
 	Eof        = "TK_EOF", -- End of file
 
--- +----LITERALS----+
+	--[[ +----LITERALS----+ ]]--
 	Int    = "TK_INT",    -- 0
 	Float  = "TK_FLOAT",  -- 0.0
 	String = "TK_STRING", -- "x"
 	Char   = "TK_CHAR",   -- 'x'
 
--- +----PUNCTUATION----+
+	--[[ +----PUNCTUATION----+ ]]--
 	LCurly   = "TK_LEFT_CURLY",    -- {
 	RCurly   = "TK_RIGHT_CURLY",   -- }
 	LBracket = "TK_LEFT_BRACKET",  -- [
@@ -57,12 +41,12 @@ Token.Types = {
 	LEq      = "TK_LEQ",           -- <
 	GEq      = "TK_GEQ",           -- <
 
--- +----TYPES----+
+	--[[ +----TYPES----+ ]]--
 	TypeInt    = "TK_TYPE_INT",    -- Int
 	TypeFloat  = "TK_TYPE_FLOAT",  -- Float
 	TypeString = "TK_TYPE_STRING", -- String
 
--- +----KEYWORDS----+
+	--[[ +----KEYWORDS----+ ]]--
 	KeywordIf      = "TK_KEYWORD_IF",      -- if
 	KeywordElse    = "TK_KEYWORD_ELSE",    -- else
 	KeywordSwitch  = "TK_KEYWORD_SWITCH",  -- switch
@@ -78,15 +62,38 @@ Token.Types = {
 	KeywordClass   = "TK_KEYWORD_CLASS",   -- class
 	KeywordUnion   = "TK_KEYWORD_UNION",   -- union
 
--- +----PREPROCCESSOR----+
+	--[[ +----PREPROCCESSOR----+ ]]--
 	PreProcInclude   = "TK_PREPROC_INCLUDE", -- #include
 	PreProcAssert    = "TK_PREPROC_ASSERT",  -- #assert
 
--- +----DIRECTIVES----+
+	--[[ +----DIRECTIVES----+ ]]--
 	DirDate = "TK_DIRECTIVE_DATE", -- __DATE__
 	DirTime = "TK_DIRECTIVE_TIME", -- __TIME__
 	DirLine = "TK_DIRECTIVE_LINE", -- __LINE__
 	DirFile = "TK_DIRECTIVE_FILE", -- __FILE__
 }
+
+-- Creates a new token. Takes in a type, lexeme, position, and optionally a value.
+function Token.New(type, lexeme, pos, value)
+	local self = {
+		Type = type,
+		Lexeme = lexeme,
+		Position = pos,
+		Value = Value or 0
+	}
+
+	--[[ Returns whether or not the token's type is equal to the passed in type. ]]--
+	function self.Is(type)
+		return self.Type == type1
+	end
+
+	return self
+end
+
+function Token.IsValidTokenType(t)
+	if type(t) ~= "string" then return false end
+	if not table.find(Token.Types, t) then return false end
+	return true
+end
 
 return Token
